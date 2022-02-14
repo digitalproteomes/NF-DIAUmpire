@@ -4,22 +4,6 @@ include {folder_to_pseudo_mzxml} from './nfmodule_diaumpire/diaumpire_workflows.
 
 workflow {
     main:
-    if(params.help) {
-	log.info ""
-	log.info "DIA-Umpire workflow"
-	log.info "--------------------"
-	log.info ""
-	log.info "Generates pseudo-DDA mzXML files from DIA MS runs via DIA-Umpire."
-	log.info ""
-	log.info "Options:"
-	log.info "  --help:           show this message and exit"
-	log.info "  --dia_folder:     folder with DIA mzXML files to be parsed (default: $params.dia_folder)"
-	log.info "  --diau_se_params: DIA-Umpire_SE parameter file (default: $params.diau_se_params)"
-	log.info ""
-	log.info "Results will be stored in Results/diaumpire"
-	log.info ""
-	exit 1
-
     log.info("==================================================")
     log.info("Executing $params.workflow_type DIAUmpire workflow")
     log.info("")
