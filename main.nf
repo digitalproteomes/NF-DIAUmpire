@@ -1,3 +1,18 @@
+nextflow.enable.dsl=2
+
+include {folder_to_pseudo_mzxml} from './nfmodule_diaumpire/diaumpire_workflows.nf'
+
+workflow {
+    main:
+    log.info("==================================================")
+    log.info("Executing $params.workflow_type DIAUmpire workflow")
+    log.info("")
+    log.info("Parameters:")
+    log.info(" DIA folder:\t $params.dia_folder")
+    log.info(" DIA folder:\t $params.diau_se_params")
+    log.info("==================================================")
+}
+
 if(params.help) {
     log.info ""
     log.info "DIA-Umpire workflow"
@@ -13,32 +28,7 @@ if(params.help) {
     log.info "Results will be stored in Results/DIAUmpire"
     log.info ""
     exit 1
-}
 
-process diaUmpire {
-    input:
-    file dia_file from file("${params.dia_folder}/*.mzXML")
-    file diau_se_params from file(params.diau_se_params)
-
-    output:
-    file '*.mgf' into diaUmpireOut
-    
-    """
-    dia_umpire_se $dia_file $diau_se_params
-    """
-}
-
-process mgf2mzxml {
-    publishDir 'Results/DIAUmpire'
-
-    input:
-    // For each DIA file DIA-Umpire will generate 3 pseudo mgf files
-    file mgf_file from diaUmpireOut.flatten()
-
-    output:
-    file '*.mzXML'
-    
-    """
-    msconvert $mgf_file --mzXML
-    """
+    folder_to_pseudo_mzxml(params.dia_folder,
+			   params.diau_se_params)
 }
