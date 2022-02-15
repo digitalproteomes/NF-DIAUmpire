@@ -14,5 +14,6 @@ workflow {
 
 
     folder_to_pseudo_mzxml(params.dia_folder,
-			   params.diau_se_params)
+			   params.diau_se_params,
+			   params.diau_threads)
 }
