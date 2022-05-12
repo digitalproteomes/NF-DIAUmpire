@@ -6,6 +6,8 @@ The workflow takes the following parameters:
 *  --help:           show this message and exit
 *  --dia_folder:     folder with DIA mzXML files to be parsed (default: Data/DIA)
 *  --diau_se_params: DIA-Umpire_SE parameter file (default: Params/diaumpire_se.params)
+*  --diau_threads:   Number of cores to use (default: 20)
+
 
 Example usage:
 
